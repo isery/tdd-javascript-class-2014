@@ -102,5 +102,12 @@ describe('Test Compass', function() {
         expect(Compass.prototype.showText).toHaveBeenCalledWith(1);
       });
     });
+    describe('Test showAndRotate', function(){
+      it('should return N for 0', function(){
+        compass.showAndRotate(0)
+        expect(Compass.prototype.rotate).toHaveBeenCalledWith(0);
+        expect(Compass.prototype.showText).toHaveBeenCalledWith("N");
+      });
+    });
   });
 });
