@@ -41,6 +41,10 @@ Compass.prototype.showAndRotate = function(counter) {
   this.showText(angle);
 }
 
+function mouseWheelHandler(event){
+  compass.showAndRotate(event.wheelDelta);
+}
+
 describe('Test suite', function() {
   it('works fine', function() {
     expect(true).toBe(true);
@@ -133,6 +137,18 @@ describe('Test Compass', function() {
         compass.showAndRotate(315)
         expect(Compass.prototype.rotate).toHaveBeenCalledWith(315);
         expect(Compass.prototype.showText).toHaveBeenCalledWith("NW");
+      });
+    });
+  });
+  describe('MouseWheelHandler is working', function() {
+    beforeEach(function(){
+      spyOn(Compass.prototype, 'showAndRotate');
+    });
+
+    describe('Test showAndRotate', function(){
+      it('should be called', function(){
+        mouseWheelHandler({wheelDelta: 0}, compass);
+        expect(Compass.prototype.showAndRotate).toHaveBeenCalledWith(0);
       });
     });
   });
