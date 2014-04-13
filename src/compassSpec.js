@@ -16,11 +16,17 @@ Compass.prototype.getAngle = function(counter) {
 }
 
 Compass.prototype.showText = function(text) {
-  jQuery(this.text).html(text)
+  $(this.text).html(text)
 }
 
 Compass.prototype.rotate = function(angle) {
-  jQuery(this.img).css('webkitTransform', 'rotate(' + angle + 'deg)');
+  $(this.img).css('webkitTransform', 'rotate(' + angle + 'deg)');
+}
+
+Compass.prototype.showAndRotate = function(counter) {
+  angle = this.getAngle(counter);
+  this.rotate(angle);
+  this.showText(angle);
 }
 
 describe('Test suite', function() {
@@ -31,7 +37,7 @@ describe('Test suite', function() {
 
 describe('Test Compass', function() {
   beforeEach(function() {
-    compass = new Compass("#textfiel");
+    compass = new Compass("#textfield","#imgfield");
   });
   describe('Test getAngle', function() {
     it('should return 1', function() {
@@ -80,6 +86,20 @@ describe('Test Compass', function() {
       it('should be called', function(){
         compass.rotate(1)
         expect(Compass.prototype.rotate).toHaveBeenCalledWith(1);
+      });
+    });
+  });
+  describe('showAndRotate is working', function() {
+    beforeEach(function(){
+      spyOn(Compass.prototype, 'rotate');
+      spyOn(Compass.prototype, 'showText');
+    });
+
+    describe('Test showAndRotate', function(){
+      it('should be called', function(){
+        compass.showAndRotate(1)
+        expect(Compass.prototype.rotate).toHaveBeenCalledWith(1);
+        expect(Compass.prototype.showText).toHaveBeenCalledWith(1);
       });
     });
   });
