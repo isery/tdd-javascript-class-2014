@@ -2,7 +2,8 @@
 // write code here
 var $ = require('jquery');
 
-function Compass(){
+function Compass(text){
+  this.text = text
 }
 
 Compass.prototype.getAngle = function(counter) {
@@ -13,6 +14,10 @@ Compass.prototype.getAngle = function(counter) {
   return angle;
 }
 
+Compass.prototype.showText = function(text) {
+  jQuery(this.text).html(text)
+}
+
 describe('Test suite', function() {
   it('works fine', function() {
     expect(true).toBe(true);
@@ -21,7 +26,7 @@ describe('Test suite', function() {
 
 describe('Test Compass', function() {
   beforeEach(function() {
-    compass = new Compass();
+    compass = new Compass("#textfiel");
   });
   describe('Test getAngle', function() {
     it('should return 1', function() {
@@ -47,6 +52,18 @@ describe('Test Compass', function() {
   describe('Test if jquery is working', function() {
   it('works fine', function() {
       expect($).toBeDefined();
+    });
+  });
+  describe('showText is working', function() {
+    beforeEach(function(){
+      spyOn(Compass.prototype, 'showText');
+    });
+
+    describe('Test showText', function(){
+      it('should be called', function(){
+        compass.showText(1)
+        expect(Compass.prototype.showText).toHaveBeenCalledWith(1);
+      });
     });
   });
 });
