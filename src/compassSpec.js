@@ -128,5 +128,12 @@ describe('Test Compass', function() {
         expect(Compass.prototype.showText).toHaveBeenCalledWith("S");
       });
     });
+    describe('Test showAndRotate', function(){
+      it('should return NW for 315', function(){
+        compass.showAndRotate(315)
+        expect(Compass.prototype.rotate).toHaveBeenCalledWith(315);
+        expect(Compass.prototype.showText).toHaveBeenCalledWith("NW");
+      });
+    });
   });
 });
