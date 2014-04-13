@@ -2,8 +2,9 @@
 // write code here
 var $ = require('jquery');
 
-function Compass(text){
+function Compass(text, img){
   this.text = text
+  this.img = img
 }
 
 Compass.prototype.getAngle = function(counter) {
@@ -16,6 +17,10 @@ Compass.prototype.getAngle = function(counter) {
 
 Compass.prototype.showText = function(text) {
   jQuery(this.text).html(text)
+}
+
+Compass.prototype.rotate = function(angle) {
+  jQuery(this.img).css('webkitTransform', 'rotate(' + angle + 'deg)');
 }
 
 describe('Test suite', function() {
@@ -63,6 +68,18 @@ describe('Test Compass', function() {
       it('should be called', function(){
         compass.showText(1)
         expect(Compass.prototype.showText).toHaveBeenCalledWith(1);
+      });
+    });
+  });
+  describe('rotate is working', function() {
+    beforeEach(function(){
+      spyOn(Compass.prototype, 'rotate');
+    });
+
+    describe('Test rotate', function(){
+      it('should be called', function(){
+        compass.rotate(1)
+        expect(Compass.prototype.rotate).toHaveBeenCalledWith(1);
       });
     });
   });
