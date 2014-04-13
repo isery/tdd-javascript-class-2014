@@ -42,11 +42,11 @@ Compass.prototype.showAndRotate = function(counter) {
 
 Compass.prototype.mouseWheelHandler = function(event){
   if(event.wheelDelta > 0){
-    compass.counter++;
+    this.counter++;
   } else if (event.wheelDelta < 0){
-    compass.counter--;
+    this.counter--;
   }
-  compass.showAndRotate(compass.counter);
+  this.showAndRotate(this.counter);
 }
 
 module.exports = Compass
