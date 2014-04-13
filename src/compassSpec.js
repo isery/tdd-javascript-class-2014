@@ -1,5 +1,6 @@
 // can't require main.js
 // write code here
+var $ = require('jquery');
 
 var getAngle = function(counter) {
   angle = counter % 360;
@@ -30,5 +31,11 @@ describe('Test suite', function() {
   });
   it('should return 359', function() {
     expect(getAngle(-180)).toBe(180);
+  });
+});
+
+describe('Test if jquery is working', function() {
+it('works fine', function() {
+    expect($).toBeDefined();
   });
 });
