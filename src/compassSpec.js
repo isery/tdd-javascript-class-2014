@@ -42,7 +42,7 @@ Compass.prototype.showAndRotate = function(counter) {
   this.showText(angle);
 }
 
-function mouseWheelHandler(event){
+Compass.prototype.mouseWheelHandler = function(event){
   if(event.wheelDelta > 0){
     compass.counter++;
   } else if (event.wheelDelta < 0){
@@ -153,14 +153,20 @@ describe('Test Compass', function() {
 
     describe('Test showAndRotate', function(){
       it('should be called with 0', function(){
-        mouseWheelHandler({wheelDelta: 0}, compass);
+        compass.mouseWheelHandler({wheelDelta: 0}, compass);
         expect(Compass.prototype.showAndRotate).toHaveBeenCalledWith(0);
       });
     });
     describe('Test showAndRotate', function(){
       it('should be called with 1', function(){
-        mouseWheelHandler({wheelDelta: 100}, compass);
+        compass.mouseWheelHandler({wheelDelta: 100}, compass);
         expect(Compass.prototype.showAndRotate).toHaveBeenCalledWith(1);
+      });
+    });
+    describe('Test showAndRotate', function(){
+      it('should be called with -1', function(){
+        compass.mouseWheelHandler({wheelDelta: -100}, compass);
+        expect(Compass.prototype.showAndRotate).toHaveBeenCalledWith(-1);
       });
     });
   });
