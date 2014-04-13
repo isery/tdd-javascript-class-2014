@@ -23,3 +23,9 @@ describe('Test getAngle', function() {
     expect(getAngle(5)).toBe(5);
   });
 });
+
+describe('Test getAngle', function() {
+  it('should return 1', function() {
+    expect(getAngle(180)).toBe(180);
+  });
+});
