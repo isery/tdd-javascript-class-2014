@@ -5,6 +5,7 @@ var $ = require('jquery');
 function Compass(text, img){
   this.text = text
   this.img = img
+  this.counter = 0
   this.compassMap = {
     0: 'N',
     45: 'NE',
@@ -42,7 +43,12 @@ Compass.prototype.showAndRotate = function(counter) {
 }
 
 function mouseWheelHandler(event){
-  compass.showAndRotate(event.wheelDelta);
+  if(event.wheelDelta > 0){
+    compass.counter++;
+  } else if (event.wheelDelta < 0){
+    compass.counter--;
+  }
+  compass.showAndRotate(compass.counter);
 }
 
 describe('Test suite', function() {
